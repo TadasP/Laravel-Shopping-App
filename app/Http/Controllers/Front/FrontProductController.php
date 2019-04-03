@@ -35,6 +35,22 @@ class FrontProductController extends Controller
 
     public function store(Request $request)
     {
+        $shop = Shop::find($request->shop_id);
+
+        if($shop->owner_id !== Auth::user()->id){
+            return redirect(route('home'));
+        }
+
+        $request->validate([
+            'shop_id' => 'required|numeric',
+            'name' => 'required|max:50',
+            'category' => 'required|numeric',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'qty' => 'required|numeric',
+            'img' => 'required'
+        ]);
+
         $slug = Str::slug($request->name, '-');
 
         $product = new Product();
@@ -86,6 +102,20 @@ class FrontProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $shop = Shop::find($request->shop_id);
+        if($shop->owner_id !== Auth::user()->id){
+            return redirect(route('home'));
+        }
+
+        $request->validate([
+            'shop_id' => 'required|numeric',
+            'name' => 'required|max:50',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'qty' => 'required|numeric',
+            'img' => 'required'
+        ]);
+
         $slug = Str::slug($request->name, '-');
 
         Product::where('id', $id)

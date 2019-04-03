@@ -33,14 +33,20 @@ class FrontPostController extends Controller
 
     public function store(Request $request)
     {
-        $slug = Str::slug($request->title, '-');
+        $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
 
         $post= new Post();
+
+        $slug = Str::slug($request->title, '-');
         $post->user_id = Auth::user()->id;
         $post->title = $request->title;
         $post->slug = $slug;
         $post->content = $request->content;
-        $post->category_id = $request->category_id;
+        $post->category_id = base64_decode($request->category_id);
         $post->save();
 
         return redirect(route('frontposts.own-posts'));
@@ -79,6 +85,17 @@ class FrontPostController extends Controller
 
     public function update(Request $request, $id)
     {
+        $post = Post::find($id);
+        if($request->title !== $post->title){
+            $request->validate([
+                'title' => 'required|unique:posts|max:255',
+            ]);
+        }
+
+        $request->validate([
+            'content' => 'required'
+        ]);
+
         $slug = Str::slug($request->title, '-');
 
         Post::where('id', $id)

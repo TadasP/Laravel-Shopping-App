@@ -47,6 +47,16 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'shop_id' => 'required|numeric',
+            'name' => 'required|max:50',
+            'category' => 'required|numeric',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'qty' => 'required|numeric',
+            'img' => 'required'
+        ]);
+
         $slug = Str::slug($request->name, '-');
 
         $product = new Product();
@@ -99,6 +109,15 @@ class ProductController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'shop_id' => 'required|numeric',
+            'name' => 'required|max:50',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'qty' => 'required|numeric',
+            'img' => 'required'
+        ]);
+
         $slug = Str::slug($request->name, '-');
 
         Product::where('id', $id)

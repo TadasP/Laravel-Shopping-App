@@ -10,7 +10,7 @@
             
             <div class="form-group row">
                 <label for="name">{{ __('Shop Name') }}</label>
-                <input id="name" type="text" class="form-control" name="name">
+                <input id="name" type="text" class="form-control" name="shop_name">
             </div>
 
             <div class="form-group row">
@@ -32,6 +32,14 @@
                 <label for="pvm_code">{{ __('Pvm Payers Code') }}</label>
                 <input id="pvm_code" type="text" class="form-control" name="pvm_code">
             </div>
+
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br>
+                    @endforeach
+            </div>
+            @endif
 
             <div class="form-group row">
                 <button type="submit" class="btn btn-primary">

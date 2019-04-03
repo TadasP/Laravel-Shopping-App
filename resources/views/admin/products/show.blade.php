@@ -13,8 +13,8 @@
                     <p><b>Product weight :</b> {{$product->weight}}</p>
                     <p><b>Product weight unit :</b> {{$product->unit_id}}</p>
                     <p><b>Product quantity :</b> {{$product->qty}}</p>
-                    <p><b>Product description :</b> {{$product->description}}</p>
-                    <p><b>Product photo :</b> {{$product->img}}</p>
+                    <p style="width:70%"><b>Product description :</b> {{$product->description}}</p>
+                    <p style="width:70%; word-wrap:break-word;"><b>Product photo :</b> {{$product->img}}</p>
                     <p>
                     <b>Active :</b> 
                     @if( $product->active == 1)

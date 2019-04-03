@@ -82,6 +82,11 @@ class FrontUserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|max:225'
+        ]);
+
         User::where('id', $id)
                 ->update([
                         'name' => $request->name,

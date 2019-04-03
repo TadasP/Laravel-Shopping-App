@@ -11,7 +11,7 @@
             <div class="form-group row">
                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Shop Name') }}</label>
                 <div class="col-md-6">
-                    <input id="name" type="text" class="form-control" value="{{$shop->shop_name}}" name="name">
+                    <input id="name" type="text" class="form-control" value="{{$shop->shop_name}}" name="shop_name">
                 </div>
             </div>
 
@@ -43,6 +43,14 @@
                 </div>
             </div>
 
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br>
+                    @endforeach
+            </div>
+            @endif
+            
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">
                     <button type="submit" class="btn btn-primary">

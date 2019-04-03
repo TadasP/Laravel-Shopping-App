@@ -17,7 +17,7 @@
                 <label for="category_id">{{ __('Category') }}</label>       
                 <select id="category_id" class="form-control" name="category_id" required>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{base64_encode($category->id)}}">{{$category->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -27,7 +27,13 @@
                 <textarea id="content" rows="10" class="form-control" name="content">
                 </textarea>
             </div>
-
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        {{ $error }}<br>
+                    @endforeach
+            </div>
+            @endif
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">
                     {{ __('Create Post') }}

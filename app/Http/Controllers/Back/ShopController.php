@@ -38,15 +38,23 @@ class ShopController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'shop_name' => 'required|unique:shops|max:50',
+            'address' => 'required',
+            'phone' => 'required',
+            'company_code' => 'required',
+            'pvm_code' => 'required'
+        ]);
+
         $shop = new Shop();
         $shop->owner_id = Auth::user()->id;
-        $shop->shop_name = $request->name;
+        $shop->shop_name = $request->shop_name;
         $shop->shop_address = $request->address;
         $shop->shop_phone = $request->phone;
         $shop->shop_code = $request->company_code;
         $shop->pvm_code = $request->pvm_code;
         $shop->save();
-        return redirect(route('admin.shops'));
+        return redirect(route('admin.shops.list'));
     }
 
     public function show($id)
@@ -78,9 +86,17 @@ class ShopController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'shop_name' => 'required|unique:shops|max:50',
+            'address' => 'required',
+            'phone' => 'required',
+            'company_code' => 'required',
+            'pvm_code' => 'required'
+        ]);
+
         Shop::where('id', $id)
                 ->update([
-                        'shop_name' => $request->name,
+                        'shop_name' => $request->shop_name,
                         'shop_address' => $request->address,
                         'shop_phone' => $request->phone,
                         'shop_code' => $request->company_code,

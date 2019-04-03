@@ -40,13 +40,18 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required|numeric',
+            'type' => 'required|numeric'
+        ]);
+
         $slug = Str::slug($request->title, '-');
 
         $post = new Post();
         $post->user_id = Auth::user()->id;
         $post->title = $request->title;
         $post->slug = $slug;
-        $post->img = $request->img;
         $post->content = $request->content;
         $post->category_id = $request->category_id;
         $post->save();

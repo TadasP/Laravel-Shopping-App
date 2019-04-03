@@ -9,9 +9,9 @@
         </div>
     </div>
     @else
-    <div class="row mb-5">
+    <div class="row mb-3">
         <div class="col-12">
-            <h3>Searching by: {{$searchNeedle}}</h3>
+            <h4>Results including: {{$searchNeedle}}</h4>
         </div>
     </div>
     @if (count($posts) || count($shops) || count($products))

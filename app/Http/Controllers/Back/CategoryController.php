@@ -36,6 +36,13 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'parent_id' => 'required|numeric',
+            'type' => 'required|numeric'
+        ]);
+
         $category = new Category();
         $category->name = $request->name;
         $slug = Str::slug($request->name, '-');

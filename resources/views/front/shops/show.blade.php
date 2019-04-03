@@ -84,7 +84,7 @@
                             <label>Name</label>
                         </div>
                         <div class="col-md-8">
-                            <p>{{$shop->owner->name}}</p>
+                            <a href="{{ route('frontusers.show', $shop->owner_id) }}"><p>{{$shop->owner->name}}</p></a>
                         </div>
                     </div>
                     <div class="row">

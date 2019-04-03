@@ -61,6 +61,11 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|max:225'
+        ]);
+        
         $password = Hash::make($request->password);
         User::where('id', $id)
                 ->update([
