@@ -73,7 +73,7 @@ class FrontUserController extends Controller
         $user = User::find($id);
         $data['user'] = $user;
         $data['contact'] = Contact::where('user_id', $id)->first();
-        if($user->id == Auth::user()->id && $user->active == 1){
+        if($user->id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator') && $user->active == 1){
             return view('front.users.edit', $data);
         }else{
             return redirect(route('home'));

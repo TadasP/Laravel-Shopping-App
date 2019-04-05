@@ -64,7 +64,7 @@ class FrontShopController extends Controller
     {
         $shop = Shop::find($id);
         $data['shop'] = $shop;
-        if($shop->owner_id == Auth::user()->id && $shop->active == 1){
+        if($shop->owner_id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator') && $shop->active == 1){
             return view('front.shops.edit', $data);
         }else{
             return redirect(route('home'));

@@ -39,14 +39,14 @@
             </div>
         </div>
         <div class="col-md-2">
-            @if(Auth::user()->id == $user->id)
+            @if(Auth::user()->id == $user->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator'))
             <a href="{{ route('frontusers.edit', $user->id) }}">
             <button type="button" class="btn btn-primary btn-sm" style="margin-bottom:5px;">Edit Profile</button>
             </a>
             <form action="{{ route('frontusers.destroy', $user->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger btn-sm" type="submit" >
+                <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" type="submit" >
                     {{ __('Delete Profile') }}
                 </button>
             </form> 

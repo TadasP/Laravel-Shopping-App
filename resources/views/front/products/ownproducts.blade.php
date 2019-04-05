@@ -67,7 +67,7 @@
                     <form action="{{ route('frontproducts.destroy', $product->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                        <button class="btn btn-danger btn-sm" type="submit">
+                        <button onclick="return confirm('Are you sure?')" class="btn btn-danger btn-sm" type="submit">
                             {{ __('Delete') }}
                         </button>
                     </form>
@@ -88,4 +88,5 @@
         </div>
     </div>
 </div>
+
 @endsection

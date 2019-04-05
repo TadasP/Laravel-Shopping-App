@@ -44,7 +44,7 @@ class FrontProductController extends Controller
         $request->validate([
             'shop_id' => 'required|numeric',
             'name' => 'required|max:50',
-            'category' => 'required|numeric',
+            'category' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'qty' => 'required|numeric',
@@ -93,7 +93,7 @@ class FrontProductController extends Controller
         $product = Product::find($id);
         $data['shops'] = Shop::where('owner_id', Auth::user()->id)->where('active',1)->get();
         $data['product'] = $product;
-        if($product->shop->owner_id == Auth::user()->id && $product->active == 1){
+        if($product->shop->owner_id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator') && $product->active == 1){
             return view('front.products.edit', $data);
         }else{
             return redirect(route('home'));

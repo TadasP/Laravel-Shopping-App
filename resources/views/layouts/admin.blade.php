@@ -41,10 +41,14 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="{{route('frontusers.show', Auth::user()->id )}}">Visit Site</a>
+                            </li>
                             <li class="dropdown " > 
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }}
                                 <span class="caret"></span></a>
+
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -82,6 +86,23 @@
                                                         </li>
                                                         <li>
                                                         <a class="dropdown-item" href="{{ route('products.create') }}">{{ __('Create Product') }}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="panel panel-default" id="dropdown">
+                                            <a data-toggle="collapse" href="#dropdown-lvl7">
+                                                <span class="glyphicon glyphicon-dashboard"></span>  {{ __('Posts') }} <span class="caret"></span>
+                                            </a>
+                                            <div id="dropdown-lvl7" class="panel-collapse collapse">
+                                                <div class="panel-body">
+                                                    <ul class="nav navbar-nav">
+                                                        <li>
+                                                        <a class="dropdown-item" href="{{ route('posts.index') }}">{{ __('All Posts') }}</a>
+                                                        </li>
+                                                        <li>
+                                                        <a class="dropdown-item" href="{{ route('posts.create') }}">{{ __('Create Post') }}</a>
                                                         </li>
                                                     </ul>
                                                 </div>

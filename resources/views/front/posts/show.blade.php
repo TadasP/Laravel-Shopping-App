@@ -62,7 +62,7 @@
                         <section class="well">
                             <dl class="dl-horizontal">
                             <dd>{{$comment->created_at}}</dd>
-                            @if($comment->user_id == Auth::user()->id)
+                            @if($comment->user_id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator'))
                             <dd>
                                 <a href="{{ route('comments.edit', $comment->id) }}" style="display:inline-block;">
                                     <button class="btn btn-outline-primary btn-sm" type="submit">
@@ -72,7 +72,7 @@
                                 <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm" type="submit" >
+                                    <button class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure?')"  type="submit" >
                                         {{ __('Delete') }}
                                     </button>
                                 </form> 

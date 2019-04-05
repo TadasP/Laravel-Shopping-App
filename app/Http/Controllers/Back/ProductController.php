@@ -50,7 +50,7 @@ class ProductController extends Controller
         $request->validate([
             'shop_id' => 'required|numeric',
             'name' => 'required|max:50',
-            'category' => 'required|numeric',
+            'category' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'qty' => 'required|numeric',

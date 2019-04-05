@@ -38,7 +38,7 @@ class HomeController extends Controller
         else{
             $categories = new CategoryController();
             $data['categories'] = $categories->getFrontProductCategoryTree();
-            $productIds = Product::paginate(6);
+            $productIds = Product::where('active', 1)->paginate(6);
             $data['productsIds'] =  $productIds;
             return view('front.home', $data);
         }

@@ -2,32 +2,32 @@
 
 @section('content')
 <div class="panel panel-default">
-    <div class="panel-heading">{{ __('All Post Categories') }}</div>
+    <div class="panel-heading">{{ __('All Posts') }}</div>
     <div class="panel-body">
     <table class="table">
         <thead>
             <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Title</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
-        @foreach($categories as $category)
+        @foreach($posts as $post)
             <tr>
-                <th scope="row">{{$category->id}}</th>
-                <td>{{$category->name}}</td>
+                <th scope="row">{{$post->id}}</th>
+                <td><a href="{{ route('posts.show', $post->id) }}">{{$post->title}}</a></td>
                 <td>
-                <a href="{{ route('categories.edit', $category->id) }}">
+                <a href="{{ route('posts.edit', $post->id) }}">
                 <button class="btn btn-primary btn-sm" type="submit">
                     {{ __('Edit') }}
                 </button>
                 </a>
                 </td>
                 <td>
-                @if($category->active == 1)
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                @if($post->active == 1)
+                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                     <button class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')" type="submit">

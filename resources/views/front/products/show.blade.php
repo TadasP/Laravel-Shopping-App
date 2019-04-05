@@ -50,7 +50,7 @@
                                 <form action="{{ route('comments.destroy', $comment->id) }}" method="POST" style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm" type="submit" >
+                                    <button class="btn btn-outline-danger btn-sm"  onclick="return confirm('Are you sure?')" type="submit" >
                                         {{ __('Delete') }}
                                     </button>
                                 </form> 

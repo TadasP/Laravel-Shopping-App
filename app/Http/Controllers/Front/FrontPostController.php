@@ -75,7 +75,7 @@ class FrontPostController extends Controller
     {
         $post = Post::find($id);
         $data['post'] = $post;
-        if($post->user_id == Auth::user()->id && $post->active == 1){
+        if($post->user_id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator') && $post->active == 1 ){
             return view('front.posts.edit', $data);
         }else{
             return redirect(route('home'));
