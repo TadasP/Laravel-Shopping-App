@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
+  <meta name="_token" content="{{csrf_token()}}" />
   <title>ShareProduct</title>
 
   <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,8 +25,9 @@
         <div class="container">
         <a class="navbar-brand" href="{{ url('/home') }}">ShareProduct.lt</a>
         <form class="form-inline my-2 my-lg-0" method="GET" action="{{ route('search.result') }}">
-            <input class="form-control form-control-sm search-input" type="search" name="q" placeholder="Search..." aria-label="Search">
-            <button class="btn btn-sm my-2 my-sm-0 mr-sm-2 search-glass" type="submit"></button>
+            <input class="form-control form-control search-input" id="needle" type="search" name="q" placeholder="Search..." autocomplete="off" aria-label="Search">
+            <div id="livesearch"></div>
+            <button class="btn btn-sm my-2 my-sm-0 mr-sm-2 search-glass" type="submit" id="searchSubmit"></button>
         </form>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -117,15 +119,36 @@
         </div>
         </div>
     </nav>
-  @yield('content')
+    @yield('content')
 
-  <footer class="bg-dark">
-        <div class="container">
-            <div class="footer-copyright text-center py-3" style="color:white">© 2019 Copyright 
-                <a href="{{ url('/home') }}" style="color:gray"> ShareProduct.lt</a>
+    <footer class="bg-dark">
+            <div class="container">
+                <div class="footer-copyright text-center py-3" style="color:white">© 2019 Copyright 
+                    <a href="{{ url('/home') }}" style="color:gray"> ShareProduct.lt</a>
+                </div>
             </div>
-        </div>
-  </footer>
+    </footer>
+    <script>
+        $(document).ready(function(){
+            $('#needle').on('keyup', function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
+                url: "{{ url('search') }}",
+                method: 'post',
+                data: {
+                    q: $('#needle').val()
+                },
+                success: function(result){
+                    $('#livesearch').html(result);
+                }});
+            });
+        });
+     </script>
 </body>
 
 </html>

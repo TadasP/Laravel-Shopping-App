@@ -31,6 +31,7 @@ Route::get('front/products/{id}', 'Back\CategoryController@showFrontProducts')->
 Route::get('frontposts/list/{id}', 'Back\CategoryController@showPosts')->name('frontposts.post-list');
 Route::get('shopping/own-shops', 'Front\FrontShopController@ownShops')->name('shopping.own-shops');
 Route::get('search-result', 'SearchController@frontResults')->name('search.result');
+Route::post('search', 'SearchController@ajaxSearch')->name('ajax.search');
 
 
 Route::resources([

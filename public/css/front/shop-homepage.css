@@ -35,13 +35,25 @@ a:hover {
 }
 
 .search-input{
-  outline:none;
+  position:relative;
+}
+
+#livesearch{
+  position:absolute;
+  background:white;
+  width:203px;
+  top:80%;
+}
+
+#livesearch a:hover{
+  color:blue;
 }
 
 .search-glass{
-  width:30px;
-  height:31px;
+  width:32px;
+  height:33px;
   background-image:url('https://www.pinclipart.com/picdir/middle/102-1020850_google-clipart-search-bar-search-magnifying-glass-png.png');
   background-size:100%;
-  transform:translateX(-30px);
+  background-repeat:no-repeat;
+  transform:translateX(-32px);
 }
