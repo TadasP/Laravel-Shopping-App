@@ -24,8 +24,7 @@
 
             <div class="form-group">
                 <label for="content">{{ __('Content') }}</label>
-                <textarea id="content" rows="10" class="form-control" name="content">
-                </textarea>
+                <textarea id="content" rows="10" class="form-control" name="content"></textarea>
             </div>
             @if ($errors->any())
             <div class="alert alert-danger">

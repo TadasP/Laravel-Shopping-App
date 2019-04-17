@@ -61,9 +61,7 @@
 
             <div class="form-group">
                 <label for="description">{{ __('Description') }}</label>
-                    <textarea id="description" rows="8" class="form-control" name="description">
-                    {{$product->description}}
-                    </textarea>
+                    <textarea id="description" rows="8" class="form-control" name="description">{{$product->description}}</textarea>
             </div>
 
             @if ($errors->any())

@@ -68,8 +68,7 @@
 
             <div class="form-group">
                 <label for="description">{{ __('Description') }}</label>
-                    <textarea id="description" rows="8" class="form-control" name="description">
-                    </textarea>
+                    <textarea id="description" rows="8" class="form-control" name="description"></textarea>
             </div>
 
             <div class="form-group">

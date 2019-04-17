@@ -41,8 +41,7 @@
             <div class="form-group row">
                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
                 <div class="col-md-6">
-                    <textarea id="description" row="8" class="form-control" name="description">
-                    </textarea>
+                    <textarea id="description" row="8" class="form-control" name="description"></textarea>
                 </div>
             </div>
 

@@ -19,9 +19,7 @@
             <div class="form-group row">
                 <label for="content" class="col-md-4 col-form-label text-md-right">{{ __('Content') }}</label>
                 <div class="col-md-6">
-                    <textarea id="content" rows="8" class="form-control" name="content">
-                            {{$post->content}}
-                    </textarea>
+                    <textarea id="content" rows="8" class="form-control" name="content">{{$post->content}}</textarea>
                 </div>
             </div>
 

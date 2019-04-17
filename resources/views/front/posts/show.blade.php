@@ -56,7 +56,9 @@
                 <section class="row panel-body">
                     <section class="col-md-9">
                         <h5><a  href="{{ route('frontusers.show', $comment->user_id) }}">{{$comment->author->name}}</a></h5>
-                        <p>{{$comment->content}}</p>
+                        <div id="comment-content-{{$comment->id}}">
+                            <p>{{$comment->content}}</p>
+                        </div>
                     </section> 
                     <section id="user-description" class="col-md-3 ">
                         <section class="well">
@@ -65,7 +67,7 @@
                             @if($comment->user_id == Auth::user()->id || Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin') || Auth::user()->hasRole('Moderator'))
                             <dd>
                                 <a href="{{ route('comments.edit', $comment->id) }}" style="display:inline-block;">
-                                    <button class="btn btn-outline-primary btn-sm" type="submit">
+                                    <button class="btn btn-outline-primary btn-sm edit" value="{{$comment->id}}" type="submit">
                                         {{ __('Edit') }}
                                     </button>
                                 </a>
@@ -98,8 +100,7 @@
             
             <div class="form-group">
                 <label for="content">{{ __('Add Comment') }}</label>
-                <textarea id="content" row="1" class="form-control" name="content">
-                </textarea>
+                <textarea id="content" row="1" class="form-control" name="content"></textarea>
             </div>
 
             <div class="form-group">
@@ -111,4 +112,28 @@
         </div>
     </div>
 </section>
+<script>
+    $(document).ready(function(index){
+        $(".edit").each(function(){
+            var commentId = $(this).val();
+            $(this).click( function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
+                url: "{{ url('forum-comment-form') }}",
+                method: 'post',
+                data: {
+                    id: commentId
+                },
+                success: function(result){
+                    $('#comment-content-' + commentId).html(result);
+                }});
+            });
+        })
+    });
+</script>
 @endsection

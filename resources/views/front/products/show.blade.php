@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="row">
-        <div style="margin:auto;" class="mb-5 mt-5"><h2>Reviews</h2></div>
+        <div style="margin:auto;" class="mb-5 mt-5"><h1>Reviews</h1></div>
     </div>
     @foreach($comments as $comment)
     <div class="row clearfix">
@@ -33,17 +33,18 @@
                 <section class="row panel-body">
                     <section class="col-md-9">
                         <h5><a  href="{{ route('frontusers.show', $comment->user_id) }}">{{$comment->author->name}}</a></h5>
-                        <p>{{$comment->content}}</p>
+                        <div id="comment-content-{{$comment->id}}">
+                            <p>{{$comment->content}}</p>
+                        </div>
                     </section>
                         
                     <section id="user-description" class="col-md-3 ">
                         <section class="well">
-                            <dl class="dl-horizontal">
                             <dd>{{$comment->created_at}}</dd>
                             @if($comment->user_id == Auth::user()->id)
                             <dd>
-                                <a href="{{ route('comments.edit', $comment->id) }}" style="display:inline-block;">
-                                    <button class="btn btn-outline-primary btn-sm" type="submit">
+                                <a href="" style="display:inline-block;">
+                                    <button class="btn btn-outline-primary btn-sm edit" value="{{$comment->id}}" type="submit">
                                         {{ __('Edit') }}
                                     </button>
                                 </a>
@@ -75,9 +76,8 @@
             <input type="hidden" id="type_id" name="type_id" value="{{base64_encode($product->id)}}">
             
             <div class="form-group">
-                <label for="content">{{ __('Add Review') }}</label>
-                <textarea class="form-control rounded-0" id="content" row="10"  name="content" placeholder="Add review here...">
-                </textarea>
+                <h3>{{ __('Add Review') }}</h3>
+                <textarea class="form-control rounded-0" id="content" row="10"  name="content" placeholder="Add review here..."></textarea>
             </div>
 
             <div class="form-group">
@@ -89,4 +89,28 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(index){
+        $(".edit").each(function(){
+            var commentId = $(this).val();
+            $(this).click( function(e){
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                }
+            });
+            jQuery.ajax({
+                url: "{{ url('comment-form') }}",
+                method: 'post',
+                data: {
+                    id: commentId
+                },
+                success: function(result){
+                    $('#comment-content-' + commentId).html(result);
+                }});
+            });
+        })
+    });
+</script>
 @endsection

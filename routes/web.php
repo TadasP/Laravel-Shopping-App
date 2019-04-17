@@ -32,6 +32,11 @@ Route::get('frontposts/list/{id}', 'Back\CategoryController@showPosts')->name('f
 Route::get('shopping/own-shops', 'Front\FrontShopController@ownShops')->name('shopping.own-shops');
 Route::get('search-result', 'SearchController@frontResults')->name('search.result');
 Route::post('search', 'SearchController@ajaxSearch')->name('ajax.search');
+Route::post('comment-form', 'CommentsController@editForm')->name('edit.form');
+Route::post('update-review', 'CommentsController@updateReview')->name('update.review');
+Route::post('forum-comment-form', 'CommentsController@forumEditForm')->name('forum.edit.form');
+Route::post('update-comment', 'CommentsController@updateComment')->name('update.comment');
+
 
 
 Route::resources([

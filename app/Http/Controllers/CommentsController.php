@@ -63,5 +63,50 @@ class CommentsController extends Controller
             return redirect(route('frontproducts.show', $comment->type_id));
         }
     }
+    
+    public function editForm(Request $request)
+    {
+        $commentId = $request->id;
+        $comment = Comment::find($commentId);
 
+        $data['comment'] = $comment;
+        
+        return response( view('front.products.editForm', $data));
+    }  
+
+    public function forumEditForm(Request $request)
+    {
+        $commentId = $request->id;
+        $comment = Comment::find($commentId);
+
+        $data['comment'] = $comment;
+        
+        return response( view('front.posts.editForm', $data));
+    }
+
+    public function updateReview(Request $request)
+    {
+        $commentId = base64_decode($request->id);
+        $comment = Comment::find($commentId);
+        
+        Comment::where('id', $commentId)
+                ->update([
+                        'content' => $request->content,
+                        ]);
+
+        return redirect(route('frontproducts.show', $comment->type_id));
+    }
+
+    public function updateComment(Request $request)
+    {
+        $commentId = base64_decode($request->id);
+        $comment = Comment::find($commentId);
+        
+        Comment::where('id', $commentId)
+                ->update([
+                        'content' => $request->content,
+                        ]);
+
+        return redirect(route('frontposts.show', $comment->type_id));
+    }
 }
