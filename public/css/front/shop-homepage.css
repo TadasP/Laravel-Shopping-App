@@ -38,11 +38,16 @@ a:hover {
   position:relative;
 }
 
+#needle:focus{
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
 #livesearch{
   position:absolute;
-  background:white;
   width:203px;
-  top:80%;
+  top:82%;
 }
 
 #livesearch a:hover{

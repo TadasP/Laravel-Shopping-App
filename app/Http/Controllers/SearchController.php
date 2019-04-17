@@ -50,7 +50,7 @@ class SearchController extends Controller
     {
 
         if(strlen($request->q) > 2){
-            $output='<nav class="navbar navbar-default"><ul class="nav navbar-nav">';
+            $output='<nav class="navbar navbar-default" style="border-color:#343a40; border:1px solid; border-top:none; border-bottom-left-radius:4px; border-bottom-right-radius:4px; background:white; "><ul class="nav navbar-nav">';
 
             $productResult = Product::
             where('name', 'LIKE', "%{$request->q}%")->
@@ -83,7 +83,7 @@ class SearchController extends Controller
 
             foreach($postResult as $post){
                 $route = route('frontposts.show', $post->id);
-                $output.= '<li class="nav-item pl-2"><a href="'.$route.'">'.$post->title.'</li>'.
+                $output.= '<li class="nav-item search-li pl-2"><a href="'.$route.'">'.$post->title.'</li>'.
                 '</br>';
             }
 

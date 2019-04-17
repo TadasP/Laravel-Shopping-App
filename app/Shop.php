@@ -8,7 +8,7 @@ class Shop extends Model
 {
     public function products()
     {
-        return $this->hasMany('App\Product', 'shop_id', 'id');
+        return $this->hasMany('App\Product', 'shop_id', 'id')->where('active', '=', 1);
     }
 
     public function owner()
